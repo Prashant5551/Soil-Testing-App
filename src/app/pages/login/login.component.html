@@ -7,14 +7,16 @@
                     <h2>Welcome Back!</h2>
                     <p>Login to your account to continue</p>
                     <div class="input-group">
-                        <input type="email" placeholder="Email" required>
+                        <input type="email" [(ngModel)]="loginObj.userName" name="userName" placeholder="Email"
+                            required>
                         <span class="input-icon">📧</span>
                     </div>
                     <div class="input-group">
-                        <input type="password" placeholder="Password" required>
+                        <input type="password" [(ngModel)]="loginObj.password" name="password" placeholder="Password"
+                            required>
                         <span class="input-icon">🔒</span>
                     </div>
-                    <button type="submit" class="btn">Login</button>
+                    <button type="submit" (click)="onLogin()" class="btn">Login</button>
                 </form>
             </div>
         </div>

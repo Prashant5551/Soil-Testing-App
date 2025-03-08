@@ -1,1 +1,25 @@
-<p>layout works!</p>
+<div class="d-flex">
+    <div class="sidebar" id="sidebar">
+        <div class="sidebar-header">
+            <span class="text-center ps-3">
+                <i class="fas fa-seedling text-success me-2"></i><span> Soil Test </span>
+            </span>
+            <button class="btn btn-sm btn-light" id="toggleBtn"><i class="fas fa-bars"></i></button>
+        </div>
+        <ul>
+            <li routerLink="users"><i class="fas fa-user-plus"></i> <span>New Users</span></li>
+            <li routerLink="sites"><i class="fas fa-map-marked-alt"></i> <span>Sites</span></li>
+            <li routerLink="tests"><i class="fas fa-vial"></i> <span>Test</span></li>
+            <li routerLink="test-types"><i class="fas fa-ruler-combined"></i> <span>Test Types</span></li>
+        </ul>
+
+        <div class="sidebar-footer">
+            <span id="username">Logged in as: {{ masterSrv.loggedUserData?.userName}}</span>
+            <button class="btn btn-danger w-75" (click)="onLogOff()">
+                <i class="fas fa-sign-out-alt"></i> <b>Logout </b> </button>
+        </div>
+    </div>
+    <div class="main-content" id="mainContent">
+        <router-outlet />
+    </div>
+</div>

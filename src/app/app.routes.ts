@@ -5,6 +5,7 @@ import { DashboardComponent } from './pages/dashboard/dashboard.component';
 import { UsersComponent } from './pages/users/users.component';
 import { SitesComponent } from './pages/sites/sites.component';
 import { TestTypesComponent } from './pages/test-types/test-types.component';
+import { TestsComponent } from './pages/tests/tests.component';
 
 export const routes: Routes = [
 
@@ -37,6 +38,10 @@ export const routes: Routes = [
             {
                 path:'test-types',
                 component:TestTypesComponent
+            },
+            {
+                path:'tests',
+                component:TestsComponent
             }
 
         ]
