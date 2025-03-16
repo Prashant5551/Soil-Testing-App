@@ -17,5 +17,18 @@ export class User {
 export interface ApiResponse {
     message: string,
     result: boolean,
-    data: string
+    data: any
 }
+
+export interface UserList {
+    userId: number
+    userName: string
+    emailId: string
+    fullName: string
+    role: string
+    createdDate: string
+    password: string
+    projectName: string
+    refreshToken: string
+    refreshTokenExpiryTime: string
+  }

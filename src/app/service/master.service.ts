@@ -25,7 +25,11 @@ export class MasterService {
     return this.http.post(this.apiUrl + "login", obj);
   }
 
-  createUser(obj:User) :Observable<ApiResponse>{
-    return this.http.post<ApiResponse>(`${this.apiUrl}AddnewUser`,obj)
+  createUser(obj: User): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${this.apiUrl}AddnewUser`, obj)
+  }
+
+  getAllUsers(): Observable<ApiResponse> {
+    return this.http.get<ApiResponse>(`${this.apiUrl}GetAllUsers`)
   }
 }
