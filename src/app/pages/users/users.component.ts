@@ -16,6 +16,10 @@ export class UsersComponent {
   isNewFormVisible = signal<boolean>(false);
   userList: UserList[] = [];
 
+  ngOnInit() {
+    this.loadUsers();
+  }
+
   showHideForm() {
     this.isNewFormVisible.set(!this.isNewFormVisible());
   }
@@ -30,12 +34,41 @@ export class UsersComponent {
     this.masterSrv.createUser(this.userobj).subscribe((res: ApiResponse) => {
       if (res.result) {
         alert("User Created");
+        this.loadUsers();
       } else {
         alert(res.message);
       }
     })
   }
 
+  onEdit(data: User) {
+    this.userobj = data;
+    this.showHideForm();
+  }
 
+  onUpdateUser() {
+    this.masterSrv.updateUser(this.userobj).subscribe((res: ApiResponse) => {
+      if (res.result) {
+        alert("User Updated");
+        this.loadUsers();
+      } else {
+        alert(res.message);
+      }
+    })
+  }
+
+  onDelete(id: number) {
+    const isDelete = confirm("Are you Sure you want to Delete?");
+    if (isDelete == true) {
+      this.masterSrv.deleteUserById(id).subscribe((res: ApiResponse)=>{
+        if (res.result) {
+          alert("User Deleted");
+          this.loadUsers();
+        } else {
+          alert(res.message)
+        }
+      })
+    }
+  }
 
 }
