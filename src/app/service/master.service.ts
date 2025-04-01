@@ -32,4 +32,14 @@ export class MasterService {
   getAllUsers(): Observable<ApiResponse> {
     return this.http.get<ApiResponse>(`${this.apiUrl}GetAllUsers`)
   }
+
+  updateUser(obj: User): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${this.apiUrl}UpdateUser`, obj)
+  }
+
+  deleteUserById(id: number): Observable<ApiResponse> {
+    return this.http.delete<ApiResponse>(`${this.apiUrl}DeleteUserByUserId?userId=${id}`)
+  }
+
 }
+
