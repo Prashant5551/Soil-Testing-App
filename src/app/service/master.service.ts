@@ -41,5 +41,9 @@ export class MasterService {
     return this.http.delete<ApiResponse>(`${this.apiUrl}DeleteUserByUserId?userId=${id}`)
   }
 
+  createNewSite(obj: any): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${this.apiUrl}CreateNewSites`, obj)
+  }
+
 }
 
