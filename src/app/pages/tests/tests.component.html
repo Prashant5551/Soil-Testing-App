@@ -1,1 +1,164 @@
-<p>tests works!</p>
+<div class="container-fluid">
+
+
+    <div class="row">
+        <div class="col-md-2 testsidebar">
+            <h4>Tests</h4>
+            <button class="btn btn-success w-100 mb-1" (click)="toggleTestForm()">
+                <i class="fas fa-plus"></i> Add New Test
+            </button>
+            <div class="list-group" id="testList">
+                <!-- Dynamically added test items -->
+            </div>
+        </div>
+        <div class="col-md-10 p-4 sideContent">
+            @if (isNewTest) {
+            <div class="form-container" id="testFormContainer">
+                <h4>Create / Edit Test</h4>
+                <form id="testForm">
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="mb-1">
+                                <label for="testName" class="form-label">Test Name</label>
+                                <input type="text" [(ngModel)]="testObj.testName" class="form-control" name="testName"
+                                    required>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-1">
+                                <label for="testDate" class="form-label">Test Date</label>
+                                <input type="date" [(ngModel)]="testObj.testDate" class="form-control" name="testDate"
+                                    required>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-4">
+                            <div class="mb-1">
+                                <label for="testName" class="form-label"> Site</label>
+                                <select name="siteId" [(ngModel)]="testObj.siteId" class="form-select">
+                                    <option value="">Select Site</option>
+                                    @for (item of siteList$|async; track $index) {
+                                    <option [value]="item.siteId" value="">{{item.siteName}}</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-1">
+                                <label for="testName" class="form-label"> Engineer</label>
+                                <select name="engineerId" [(ngModel)]="testObj.engineerId" class="form-select">
+                                    <option value="">Select Engineer</option>
+                                    @for (item of userList$|async; track $index) {
+                                    <option [value]="item.userId" value="">{{item.userName}}</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-4">
+                            <div class="mb-1">
+                                <label for="testName" class="form-label"> Test Type</label>
+                                <select name="testTypeId" [(ngModel)]="testObj.testTypeId" class="form-select">
+                                    <option value="">Select Test Type</option>
+                                    @for (item of testTypes$|async; track $index) {
+                                    <option [value]="item.testTypeId" value="">{{item.testName}}</option>
+                                    }
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row pb-2">
+                        <div class="col-6">
+                            <label for="testName" class="form-label">Remarks</label>
+                            <textarea name="remarks" placeholder="Remarks" [(ngModel)]="testObj.remarks"></textarea>
+                        </div>
+                    </div>
+
+
+
+                    <button type="submit" class="btn btn-primary" (click)="onSaveTest()">Save Test</button>
+                </form>
+            </div>
+            }
+            <div class="form-container mt-4" id="measurementFormContainer">
+                <h4>Measurements for Selected Test</h4>
+                <form id="siteForm">
+                    <div class="row mb-1">
+                        <div class="col-md-4">
+                            <label class="form-label">Excavated Hole Volume (m³):</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-cube"></i></span>
+                                <input type="number" class="form-control" id="excavatedHoleVolume" value="0.01"
+                                    placeholder="Enter volume">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Wet Soil Weight (kg):</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-weight"></i></span>
+                                <input type="number" class="form-control" id="wetSoilWeight" value="0.01"
+                                    placeholder="Enter weight">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="form-label">Moisture Content (%):</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-tint"></i></span>
+                                <input type="number" class="form-control" id="moistureContent" value="100"
+                                    placeholder="Enter content percentage">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+
+                        <div class="col-md-4">
+                            <label class="form-label">Dry Soil Weight (kg):</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-weight-hanging"></i></span>
+                                <input type="number" class="form-control" id="drySoilWeight" value="0.01"
+                                    placeholder="Enter weight">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Sand Volume Used (m³):</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-cubes"></i></span>
+                                <input type="number" class="form-control" id="sandVolumeUsed" value="0"
+                                    placeholder="Enter volume">
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <label class="form-label">Dry Density (kg/m³):</label>
+                            <div class="input-group">
+                                <span class="input-group-text"><i class="fas fa-weight-hanging"></i></span>
+                                <input type="number" class="form-control" id="dryDensity" value="0.01"
+                                    placeholder="Enter density">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-1">
+                        <div class="col-md-6">
+                            <label class="form-label">Soil Classification:</label>
+                            <input type="text" class="form-control" id="soilClassification" value="string"
+                                placeholder="Enter classification">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-icon ">
+                        <span><i class="fas fa-plus"></i> Add </span>
+                    </button>
+                    <button type="submit" class="btn btn-warning  btn-icon ">
+                        <span><i class="fas fa-edit"></i> Update</span>
+                    </button>
+                </form>
+                <div class="mt-3">
+                    <h5>Measurements List</h5>
+                    <ul class="list-group" id="measurementList">
+                        <!-- Dynamically added measurement items -->
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

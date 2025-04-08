@@ -45,5 +45,17 @@ export class MasterService {
     return this.http.post<ApiResponse>(`${this.apiUrl}CreateNewSites`, obj)
   }
 
+  GetSites(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}GetSites`)
+  }
+
+  getAllTestTypes(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}GetAllTestTypes`)
+  }
+
+  createTest(obj: User): Observable<ApiResponse> {
+    return this.http.post<ApiResponse>(`${this.apiUrl}CreateTest`, obj)
+  }
+
 }
 
